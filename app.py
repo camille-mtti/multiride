@@ -16,12 +16,14 @@ def hello_world():
 if __name__ == '__main__':
     app.run()
 
+
 @app.route('/geocode', methods=['POST'])
 def get_geocode():
     content = request.data
     content = json.loads(content)["address"]
     coord = coordinate.get_coordinates(content)
     return jsonify(lattitude=coord[0], longitude=coord[1])
+
 
 @app.route('/journey',methods=['POST'])
 def get_journey():
