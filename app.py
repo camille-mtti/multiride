@@ -25,23 +25,23 @@ def get_geocode():
     return jsonify(lattitude=coord[0], longitude=coord[1])
 
 
-@app.route('/journey',methods=['POST'])
+@app.route('/journey', methods=['POST'])
 def get_journey():
 
-    #loads content from request body
+    # loads content from request body
     content = request.data
     source = json.loads(content)["from"]
     destination = json.loads(content)["to"]
 
-    #geocode coordinates
+    # geocode coordinates
     source_coord = coordinate.get_coordinates(source)
     source_coord = coordinate.get_coordinates_string(source_coord)
     print(source_coord)
-    #transform into string
+    # transform into string
     dest_coord = coordinate.get_coordinates(destination)
     dest_coord = coordinate.get_coordinates_string(dest_coord)
 
-    #request for journey
+    # request for journey
     transport = journey.get_navitia_journey(source_coord, dest_coord)
     return jsonify(transport)
 
