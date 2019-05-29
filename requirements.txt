@@ -2,3 +2,5 @@ flask
 requests
 request
 jsonify
+uber-rides
+python-dotenv
