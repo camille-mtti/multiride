@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask import Response
 import journey
 import coordinate
 import json
@@ -41,7 +42,7 @@ def get_journey():
   response = []
   for n in transport:
     response.append({"coord": n.coord, "address": n.address})
-  return json.dumps(response)
+  return Response(json.dumps(response), mimetype="application/json")
 
 
 if __name__ == '__main__':
