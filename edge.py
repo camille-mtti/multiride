@@ -2,7 +2,7 @@ class Edge:
   def __init__(self, src, dest, type, weigth):
     self.src = src
     self.dest = dest
-    self.weigth = weigth
+    self.weight = weight
     self.type = type
     self.avoidedEdges = []
 
