@@ -38,7 +38,10 @@ def get_journey():
 
     # request for journey
     transport = journey.get_navitia_journey(source_coord, dest_coord)
-    return jsonify(transport)
+    response = []
+    for n in transport:
+        response.append({"coord": n.coord, "address": n.address})
+    return json.dumps(response)
 
 
 if __name__ == '__main__':
