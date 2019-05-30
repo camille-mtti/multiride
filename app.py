@@ -8,10 +8,10 @@ import json
 app = Flask(__name__)
 
 # test git config n2
-
 @app.route('/')
 def hello_world():
     return 'Hello World!'
+
 
 @app.route('/geocode', methods=['POST'])
 def get_geocode():
@@ -39,6 +39,7 @@ def get_journey():
     # request for journey
     transport = journey.get_navitia_journey(source_coord, dest_coord)
     return jsonify(transport)
+
 
 if __name__ == '__main__':
     app.run()
