@@ -1,4 +1,5 @@
 # Multiride
+
 This project is for Advanced Algorithmics and Programming Class at ISEP.  
 The goal of this project is to create an API that calculate journeys from point A to point B by combining public transport and uber rides in Paris.  
 
@@ -16,13 +17,13 @@ You need to have some credentials to access used APIs :
 
 - [Uber](https://developer.uber.com/)
 - [Navitia](http://doc.navitia.io/)
-- 
+
 See file .env.example to configurate your environment variables
 
 ### Installing
 
-This project is coded in Python 3.7.3 so you need python to run it. We also recommend to configurate a virtual environment to test this project. 
- 
+This project is coded in Python 3.7.3 so you need python to run it. We also recommend to configurate a virtual environment to test this project.
+
 We used several python librairies for this project :
 
 - flask
