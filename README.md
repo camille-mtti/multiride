@@ -53,8 +53,10 @@ The API have the following endpoints :
 - GET / -> verify that the API works
 - POST /geocode -> calculate coordinates of a given address
 
-  ```bash
-  {"address" : "28 rue notre dame des champs Paris France"}
+  ```json
+  {
+    "address" : "28 rue notre dame des champs Paris France"
+  }
   ```
 
 - POST /journey -> calculate journey
