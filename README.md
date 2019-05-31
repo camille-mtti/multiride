@@ -4,55 +4,69 @@ The goal of this project is to create an API that calculate journeys from point 
 
 ## Getting Started
 
-you can clone the repository with  
-```
+you can clone the repository with :
+
+```bash
 git clone https://github.com/k-1001/multiride.git
 ```
 
 ### Prerequisites
 
 You need to have some credentials to access used APIs :
+
 - [Uber](https://developer.uber.com/)
-- [Navitia](http://doc.navitia.io/)  
+- [Navitia](http://doc.navitia.io/)
+- 
 See file .env.example to configurate your environment variables
 
 ### Installing
 
 This project is coded in Python 3.7.3 so you need python to run it. We also recommend to configurate a virtual environment to test this project. 
  
-We used several python librairies for this project : 
+We used several python librairies for this project :
+
 - flask
 - requests
 - request
 - jsonify
 - uber-rides
-- python-dotenv   
- 
+- python-dotenv
+
 To install them you need to run :
-```
+
+```bash
 pip install -r requirements.txt
 ```
+
 ### Running
+
 To run the project, use the command :
-```
+
+```bash
 python app.py
 ```
 
-##API Documentation
+## API Documentation
+
 The API have the following endpoints :
+
 - GET / -> verify that the API works
 - POST /geocode -> calculate coordinates of a given address
-```
-{"address" : "28 rue notre dame des champs Paris France"}
-```
-- POST /journey -> calculate journey 
-```
-{"from":"address 1",
-"to":"address2}
-```
+
+  ```bash
+  {"address" : "28 rue notre dame des champs Paris France"}
+  ```
+
+- POST /journey -> calculate journey
+
+  ```json
+  {
+    "from":"address 1",
+    "to":"address2"
+  }
+  ```
 
 ## Authors
 
-* **Camille Marchetti** - [k-1001](https://github.com/k-1001)
-* **Henry Matheisen** - [hmatheisen](https://github.com/hmatheisen)
-
+- **Camille Marchetti** - [k-1001](https://github.com/k-1001)
+- **Henry Matheisen** - [hmatheisen](https://github.com/hmatheisen)
