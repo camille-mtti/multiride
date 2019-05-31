@@ -1,6 +1,6 @@
 # Multiride
 This project is for Advanced Algorithmics and Programming Class at ISEP.  
-The goal of this project is to create an API that calculate journeys from point A to point B by combining public transport and uber rides.  
+The goal of this project is to create an API that calculate journeys from point A to point B by combining public transport and uber rides in Paris.  
 
 ## Getting Started
 
