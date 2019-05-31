@@ -58,6 +58,6 @@ def create_edges_from_navitia(response, graph):
             src = calculate_node_coord_from_navitia(section['from'])
             dest = calculate_node_coord_from_navitia(section['to'])
             if graph.find_node_from_coord(src.coord) and graph.find_node_from_coord(dest.coord):
-                    edge = Edge(graph.find_node_from_coord(src.coord),graph.find_node_from_coord(dest.coord), calculate_section_type(section),1)
+                    edge = Edge(graph.find_node_from_coord(src.coord),graph.find_node_from_coord(dest.coord), calculate_section_type(section),1,section['duration'])
                     edges.append(edge)
     return edges

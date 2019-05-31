@@ -41,7 +41,7 @@ def get_journey():
     dest_coord = coordinate.get_coordinates_string(dest_coord)
 
     # request for journey
-    transport = journey.get_navitia_journey(source_coord, dest_coord)
+    transport = journey.get_journey(source_coord, dest_coord)
     response = []
     for n in transport:
         response.append({"coord": n.coord, "address": n.address})

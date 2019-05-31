@@ -8,7 +8,6 @@ class Graph:
         self.nodes = []
         self.edges = []
 
-
     def print_nodes(self):
         print('mes nodes : ')
         for n in self.nodes:
@@ -28,6 +27,11 @@ class Graph:
         for e in es :
             self.edges.append(e)
 
+    def find_edge(self, src, dest):
+        for e in self.edges :
+            if e.src == src and e.dest == dest:
+                return e
+        return None
 
     def print_edges(self):
         print('mes edges : ')
