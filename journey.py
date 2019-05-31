@@ -1,5 +1,6 @@
 import requests
 import json
+import navitia
 from graph import Graph
 from dotenv import load_dotenv
 from os import getenv
@@ -13,6 +14,8 @@ def get_navitia_journey(source, dest):
     response = json.loads(r.text)
     print(response)
     graph = Graph()
-    graph.create_node_from_navitia(response)
-    graph.create_edges_from_navitia(response)
+    graph.add_nodes(navitia.create_node_from_navitia(response))
+    graph.add_edges(navitia.create_edges_from_navitia(response, graph))
+    graph.print_nodes()
+    graph.print_edges()
     return graph.nodes
