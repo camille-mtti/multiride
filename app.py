@@ -6,44 +6,47 @@ import journey
 import coordinate
 import json
 
+from os import getenv
+
 app = Flask(__name__)
+
 
 # test git config n2
 @app.route('/')
 def hello_world():
-  return 'Hello World!'
+    return 'Hello World!'
 
 
 @app.route('/geocode', methods=['POST'])
 def get_geocode():
-  content = request.data
-  content = json.loads(content)["address"]
-  coord = coordinate.get_coordinates(content)
-  return jsonify(lattitude=coord[0], longitude=coord[1])
+    content = request.data
+    content = json.loads(content)["address"]
+    coord = coordinate.get_coordinates(content)
+    return jsonify(lattitude=coord[0], longitude=coord[1])
 
 
 @app.route('/journey', methods=['POST'])
 def get_journey():
 
-  # loads content from request body
-  content = request.data
-  source = json.loads(content)["from"]
-  destination = json.loads(content)["to"]
+    # loads content from request body
+    content = request.data
+    source = json.loads(content)["from"]
+    destination = json.loads(content)["to"]
 
-  # geocode coordinates
-  source_coord = coordinate.get_coordinates(source)
-  source_coord = coordinate.get_coordinates_string(source_coord)
+    # geocode coordinates
+    source_coord = coordinate.get_coordinates(source)
+    source_coord = coordinate.get_coordinates_string(source_coord)
 
-  dest_coord = coordinate.get_coordinates(destination)
-  dest_coord = coordinate.get_coordinates_string(dest_coord)
+    dest_coord = coordinate.get_coordinates(destination)
+    dest_coord = coordinate.get_coordinates_string(dest_coord)
 
-  # request for journey
-  transport = journey.get_navitia_journey(source_coord, dest_coord)
-  response = []
-  for n in transport:
-    response.append({"coord": n.coord, "address": n.address})
-  return Response(json.dumps(response), mimetype="application/json")
+    # request for journey
+    transport = journey.get_navitia_journey(source_coord, dest_coord)
+    response = []
+    for n in transport:
+        response.append({"coord": n.coord, "address": n.address})
+    return Response(json.dumps(response), mimetype="application/json")
 
 
 if __name__ == '__main__':
-  app.run()
+    app.run()

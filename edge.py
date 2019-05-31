@@ -1,5 +1,5 @@
 class Edge:
-  def __init__(self, src, dest, type, weigth):
+  def __init__(self, src, dest, type, weight):
     self.src = src
     self.dest = dest
     self.weight = weight
