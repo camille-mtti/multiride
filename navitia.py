@@ -35,7 +35,17 @@ def calculate_section_type(section):
         if (section['mode']=='walking'):
             return "walking"
     if(section['type']=="public_transport"):
-        return "metro"
+        if section['display_informations']['commercial_mode'] == 'Métro':
+            return "metro"
+        if section['display_informations']['commercial_mode'] == 'Bus':
+            return "bus"
+        if section['display_informations']['commercial_mode'] == 'commercial_mode':
+            return 'tramway'
+        if section['display_informations']['commercial_mode'] == 'RER' & section['display_informations']['network'] == 'RER':
+            return "rer"
+        if section['display_informations']['commercial_mode'] == 'RER' & section['display_informations']['network'] == 'Transilien':
+            return "transilien"
+        
 
 def create_edges_from_navitia(response, graph):
     journey = response['journeys'][0]
