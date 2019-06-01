@@ -32,6 +32,7 @@ def get_journey():
     content = request.data
     source = json.loads(content)["from"]
     destination = json.loads(content)["to"]
+    price = json.loads(content)["price"]
 
     # geocode coordinates
     source_coord = coordinate.get_coordinates(source)
@@ -41,7 +42,7 @@ def get_journey():
     dest_coord = coordinate.get_coordinates_string(dest_coord)
 
     # request for journey
-    transport = journey.get_journey(source_coord, dest_coord)
+    transport = journey.get_journey(source_coord, dest_coord,price)
     response = []
     for n in transport:
         response.append({"coord": n.coord, "address": n.address})

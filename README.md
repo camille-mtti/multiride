@@ -15,8 +15,8 @@ git clone https://github.com/k-1001/multiride.git
 You need to have some credentials to access used APIs :
 
 - [Uber](https://developer.uber.com/)
-- [Navitia](http://doc.navitia.io/)
-- 
+- [Navitia](http://doc.navitia.io/)  
+
 See file .env.example to configurate your environment variables
 
 ### Installing

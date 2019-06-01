@@ -34,7 +34,7 @@ class Uber:
                 self.time = estimate["duration"]
                 return self
 
-    def create_uber_trajects(self, graph):
+    def create_uber_trajects(self, graph, price):
         edges = []
         for i in range(0,len(graph.nodes)-1):
             src = graph.nodes[i]
@@ -44,9 +44,10 @@ class Uber:
                 if graph_edge and graph_edge.type == "walking" and graph_edge.duration < 6000 :
                     print("skipping uber edge" + graph_edge.src.address + " " + graph_edge.dest.address)
                 else:
-                    time = self.estimate_traject(src.coord, dest.coord).time
-                    if time >10:
-                        this_edge = Edge(src, dest, "uber", 1,time )
+                    result = self.estimate_traject(src.coord, dest.coord)
+
+                    if result.time >10 and result.price<price:
+                        this_edge = Edge(src, dest, "uber", 1, result.time)
                         edges.append(this_edge)
         return edges
 
