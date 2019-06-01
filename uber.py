@@ -45,18 +45,9 @@ class Uber:
                     print("skipping uber edge" + graph_edge.src.address + " " + graph_edge.dest.address)
                 else:
                     result = self.estimate_traject(src.coord, dest.coord)
-
                     if result.time >10 and result.price<price:
-                        this_edge = Edge(src, dest, "uber", 1, result.time)
+                        this_edge = Edge(src, dest, 1, result.time)
+                        this_edge.setType("Uber").setPrice(result.price).setDescription("Uber journey, available on the Uber App for more info")
                         edges.append(this_edge)
         return edges
 
-
-'''
-For i in range 0:nb_of_nodes : 
-   For j in range i :nb_of_nodes :
-       If (edge.duration > 600 && edge.type == walking ) :
-          Edge = Uber_edge(node(i), node(j)
-           If edge.price < budget_max
-                 Edges.append(edge)
-'''
