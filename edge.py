@@ -7,6 +7,8 @@ class Edge:
     self.avoidedEdges = []
     self.line = None
     self.duration = duration
+    self.price
+    self.description
 
 
   def addAvoidedEdge(self, edge):
