@@ -56,24 +56,24 @@ class Graph:
                 min = dist[self.nodes.index(node)]
                 min_index = self.nodes.index(node)
         #todo : what to do when if is not respected
-                 return self.nodes[min_index]
+                return self.nodes[min_index]
 
     def dijkstra(self, source):
         dist = []
         path = []
-        Q = set()
+        Q = []
 
         print("dijkstra begins")
         # init distances
         for node in self.nodes:
             dist.append(sys.maxsize)
-            Q.add(node)
+            Q.append(node)
         dist[self.nodes.index(source)] = 0
 
         while Q:
             u = self.min_distance(Q, dist)
             Q.remove(u)
-            print(u.address+" "+node.address)
+
             edge = self.find_edge(u, node)
             if(edge):
                 print("ok !"+edge.weight)
