@@ -37,7 +37,10 @@ class Graph:
     def print_edges(self):
         print('mes edges : ')
         for n in self.edges:
-            print(n.src.address + "  " + n.dest.address + " " + n.type)
+            if(n.price):
+                print(n.src.address + "  " + n.dest.address + " " + n.type+" "+str(n.price))
+            else:
+                print(n.src.address + "  " + n.dest.address + " " + n.type)
 
     def min_distance(self, Q, dist):
         min = sys.maxsize

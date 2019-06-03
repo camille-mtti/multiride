@@ -30,21 +30,22 @@ def calculate_node_coord_from_navitia(src):
         node = Node(coord, src['name'])
     return node
 
-def calculate_section_type(section):
+def set_edge_info(section, edge):
     if(section['type']=="street_network"):
         if (section['mode']=='walking'):
-            return "walking"
+            edge.setType("walking")
     if(section['type']=="public_transport"):
         if section['display_informations']['commercial_mode'] == 'Métro':
-            return "metro"
+            edge.setType("metro")
         if section['display_informations']['commercial_mode'] == 'Bus':
-            return "bus"
+            edge.setType("bus")
         if section['display_informations']['commercial_mode'] == 'commercial_mode':
-            return 'tramway'
-        if section['display_informations']['commercial_mode'] == 'RER' & section['display_informations']['network'] == 'RER':
-            return "rer"
-        if section['display_informations']['commercial_mode'] == 'RER' & section['display_informations']['network'] == 'Transilien':
-            return "transilien"
+            edge.setTyp('tramway')
+        if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations']['network'] == 'RER':
+            edge.setType("rer")
+        if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations']['network'] == 'Transilien':
+            edge.setType("transilien")
+            edge.setLine(section['display_informations']['code']).setDescription("to "+section['display_informations']['direction'])
         
 
 def create_edges_from_navitia(response, graph):
@@ -58,6 +59,7 @@ def create_edges_from_navitia(response, graph):
             src = calculate_node_coord_from_navitia(section['from'])
             dest = calculate_node_coord_from_navitia(section['to'])
             if graph.find_node_from_coord(src.coord) and graph.find_node_from_coord(dest.coord):
-                    edge = Edge(graph.find_node_from_coord(src.coord),graph.find_node_from_coord(dest.coord), calculate_section_type(section),1,section['duration'])
+                    edge = Edge(graph.find_node_from_coord(src.coord),graph.find_node_from_coord(dest.coord), 1, section['duration'])
+                    set_edge_info(section,edge)
                     edges.append(edge)
     return edges
