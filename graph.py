@@ -41,6 +41,14 @@ class Graph:
                 return e
         return None
 
+    def find_min_edge(self,src, dest):
+        edge = find_edge(src, dest)
+        for e in self.edges:
+            if e.src == src and e.dest == dest:
+                if(e<edge):
+                    edge = e
+        return e
+
     def find_node(self, node):
         for n in self.nodes :
             if n == node:
