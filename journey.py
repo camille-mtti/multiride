@@ -13,7 +13,6 @@ def get_journey(source, dest,price):
     r = requests.get('https://api.navitia.io/v1/coverage/fr-idf/journeys?from=' + source + '&to=' + dest,
       auth=(getenv("NAVITIA_TOKEN"), ''))
     response = json.loads(r.text)
-    print(response)
     graph = Graph()
     uber = Uber()
     graph.add_nodes(navitia.create_node_from_navitia(response))
