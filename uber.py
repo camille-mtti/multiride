@@ -38,14 +38,14 @@ class Uber:
         edges = []
         for i in range(0,len(graph.nodes)-1):
             src = graph.nodes[i]
-            for j in range(i, len(graph.nodes)-1):
+            for j in range(i + 1, len(graph.nodes)-1):
                 dest = graph.nodes[j]
-                graph_edge = graph.find_edge(i,j)
+                graph_edge = graph.find_edge(graph.nodes[i], graph.nodes[j])
                 if graph_edge and graph_edge.type == "walking" and graph_edge.duration < 6000 :
                     print("skipping uber edge" + graph_edge.src.address + " " + graph_edge.dest.address)
                 else:
                     result = self.estimate_traject(src.coord, dest.coord)
-                    if result.time >10 and result.price<price:
+                    if result.time > 10 and result.price<price:
                         this_edge = Edge(src, dest, 1, result.time)
                         this_edge.setType("Uber").setPrice(result.price).setDescription("Uber journey, available on the Uber App for more info")
                         edges.append(this_edge)
