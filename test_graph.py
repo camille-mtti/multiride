@@ -17,10 +17,17 @@ class TestGraph(TestCase):
         self.assertEqual(len(self.graph.nodes), 2)
 
     def test_add_edges(self):
-        edges = [Edge(self.nodes[0], self.nodes[1], 1, 100)]
+        edges = [Edge(self.nodes[0], self.nodes[1], 20, 100)]
         self.graph.add_edges(edges)
         self.assertEqual(len(self.graph.edges), 1)
 
     def test_find_node(self):
         self.assertEqual(self.graph.find_node(self.nodes[0]), self.nodes[0])
-        self.assertEqual(self.graph.find_node_from_coord(self.nodes[0].coord),self.nodes[0])
+        self.assertEqual(self.graph.find_node_from_coord(self.nodes[0].coord), self.nodes[0])
+
+    def test_find_edge(self):
+        self.assertEqual(self.graph.find_edge(self.graph.edges[0].src, self.graph.edges[0].dest), self.graph.edges[0])
+        edges = [Edge(self.nodes[0], self.nodes[1], 1, 100)]
+        self.graph.add_edges(edges)
+        self.assertEqual(self.graph.find_min_edge(self.graph.edges[0].src, self.graph.edges[0].dest), self.graph.edges[1])
+        self.assertNotEqual(self.graph.find_min_edge(self.graph.edges[0].src, self.graph.edges[0].dest), self.graph.edges[0])
