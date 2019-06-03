@@ -10,6 +10,7 @@ load_dotenv()
 
 
 def get_journey(source, dest,price):
+    print("beginning of algorithm")
     r = requests.get('https://api.navitia.io/v1/coverage/fr-idf/journeys?from=' + source + '&to=' + dest,
       auth=(getenv("NAVITIA_TOKEN"), ''))
     response = json.loads(r.text)
@@ -18,7 +19,7 @@ def get_journey(source, dest,price):
     graph.add_nodes(navitia.create_node_from_navitia(response))
     graph.add_edges(navitia.create_edges_from_navitia(response, graph))
     graph.add_edges(uber.create_uber_trajects(graph, price))
-    print("--------------------------------------------------------------------------")
+    print("---------------------------- PRINT GRAPH ----------------------------------------------")
     graph.print_nodes()
     graph.print_edges()
     graph.dijkstra(graph.nodes[0])
