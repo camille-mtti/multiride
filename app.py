@@ -44,8 +44,10 @@ def get_journey():
     # request for journey
     transport = journey.get_journey(source_coord, dest_coord,price)
     response = []
-    for n in transport:
-        response.append({"coord": n.coord, "address": n.address})
+    for e in reversed(transport):
+        response.append({
+            "from": e.src.address, "to": e.dest.address, "type": e.type, "line": e.line, "cost": e.price,
+            "description ": e.description, "duration": e.duration})
     return Response(json.dumps(response), mimetype="application/json")
 
 
