@@ -31,6 +31,12 @@ class Graph:
 
     def find_edge(self, src, dest):
         for e in self.edges :
+            # print("src")
+            # print(e.src.address)
+            # print(src.address)
+            # print("dest")
+            # print(e.dest.address)
+            # print(dest.address)
             if e.src == src and e.dest == dest:
                 return e
         return None
@@ -74,11 +80,9 @@ class Graph:
             u = self.min_distance(Q, dist)
             Q.remove(u)
 
-            edge = self.find_edge(u, node)
-            if(edge):
-                print("ok !"+edge.weight)
             #todo verify here there are problems : edge not found
             for node in u.neighbours:
+                edge = self.find_edge(u, node)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
                     dist[self.nodes.index(node)] = dict[self.nodes.index(u)] + edge.weight
                     path[self.nodes.index(node)] = u
