@@ -74,6 +74,7 @@ class Graph:
         for node in self.nodes:
             dist.append(sys.maxsize)
             Q.append(node)
+            path.append(self.edges[0])
         dist[self.nodes.index(source)] = 0
 
         while Q:
@@ -84,9 +85,9 @@ class Graph:
             for node in u.neighbours:
                 edge = self.find_edge(u, node)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
-                    dist[self.nodes.index(node)] = dict[self.nodes.index(u)] + edge.weight
-                    path[self.nodes.index(node)] = u
+                    dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
+                    path[self.nodes.index(node)] = edge
 
-        for node in path:
-            print(node.address)
+        for edge in path:
+            print(edge.src.address+ " " + edge.dest.address)
         return path
