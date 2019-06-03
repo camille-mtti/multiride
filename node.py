@@ -1,12 +1,11 @@
 class Node:
-  def __init__(self, coord, address):
-    self.neighbours = []
-    self.coord = coord
-    self.address = address
+    def __init__(self, coord, address):
+        self.neighbours = []
+        self.coord = coord
+        self.address = address
 
-  def __eq__(self, other):
-    if not isinstance(other, Node):
-      # don't attempt to compare against unrelated types
-      return NotImplemented
-
-    return self.coord == other.coord and self.address == other.address
+    # add comparable for Nodes to verify two nodes are identical
+    def __eq__(self, other):
+        if not isinstance(other, Node):
+            return NotImplemented
+        return self.coord == other.coord and self.address == other.address

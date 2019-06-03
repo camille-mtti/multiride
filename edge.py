@@ -4,36 +4,36 @@ class Edge:
         self.dest = dest
         self.weight = weight
         self.type = None
-        self.avoidedEdges = []
         self.line = None
         self.duration = duration
         self.price = None
         self.description = None
+        # add neighbours for the nodes
+        # it is a directed graph so only the src node has dest as neighbour
+        self.src.neighbours.append(self.dest)
 
-        # Add neighbour
-        self.src.neighbours.append(self.dest);
+    # methods to add caracteristics to edge to avoid to have a gigantic constructor
+    # the methods can be called successively
 
-    def addAvoidedEdge(self, edge):
-        self.avoidedEdges.append(edge)
-
-    def setPrice(self, price):
+    def set_price(self, price):
         self.price = price
         return self
 
-    def setDescription(self, desc):
+    def set_description(self, desc):
         self.description = desc
         return self
 
-    def setLine(self, line):
+    def set_line(self, line):
         self.line = line
         return self
 
-    def setType(self, type):
+    def set_type(self, type):
         self.type = type
         return self
 
+    # Comparable for edges (regarding their weight)
     def __lt__(self, other):
-        return self.weight<other.weight
+        return self.weight < other.weight
 
     def __le__(self, other):
         return self.weight <= other.weight

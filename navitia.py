@@ -38,19 +38,19 @@ def calculate_node_coord_from_navitia(src):
 def set_edge_info(section, edge):
     if(section['type']=="street_network"):
         if (section['mode']=='walking'):
-            edge.setType("walking")
+            edge.set_type("walking")
     if(section['type']=="public_transport"):
         if section['display_informations']['commercial_mode'] == 'Métro':
-            edge.setType("metro")
+            edge.set_type("metro")
         if section['display_informations']['commercial_mode'] == 'Bus':
-            edge.setType("bus")
+            edge.set_type("bus")
         if section['display_informations']['commercial_mode'] == 'commercial_mode':
             edge.setTyp('tramway')
         if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations']['network'] == 'RER':
-            edge.setType("rer")
+            edge.set_type("rer")
         if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations']['network'] == 'Transilien':
-            edge.setType("transilien")
-            edge.setLine(section['display_informations']['code']).setDescription("to "+section['display_informations']['direction'])
+            edge.set_type("transilien")
+            edge.set_line(section['display_informations']['code']).set_description("to " + section['display_informations']['direction'])
         
 
 def create_edges_from_navitia(response, graph):
