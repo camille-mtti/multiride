@@ -46,7 +46,7 @@ class Uber:
                 else:
                     result = self.estimate_traject(src.coord, dest.coord)
                     if result.time > 10 and result.price<price:
-                        this_edge = Edge(src, dest, 1, result.time)
+                        this_edge = Edge(src, dest, result.time * 0.5, result.time)
                         this_edge.setType("Uber").setPrice(result.price).setDescription("Uber journey, available on the Uber App for more info")
                         edges.append(this_edge)
         return edges

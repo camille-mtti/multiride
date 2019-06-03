@@ -39,7 +39,7 @@ class Graph:
         edge = self.find_edge(src, dest)
         for e in self.edges:
             if e.src == src and e.dest == dest:
-                if(e < edge):
+                if (e < edge):
                     edge = e
         return edge
 
@@ -47,11 +47,11 @@ class Graph:
         edge = self.find_edge(src, dest)
         for e in self.edges:
             if e.src == src and e.dest == dest:
-                if(e.price):
+                if (e.price):
                     p = price + e.price
-                    if(e < edge and (price + e.price <= price_max)):
+                    if (e < edge and (price + e.price <= price_max)):
                         edge = e
-                else :
+                else:
                     if (e < edge):
                         edge = e
         return edge
@@ -66,9 +66,9 @@ class Graph:
         print('mes edges : ')
         for n in self.edges:
             if (n.price):
-                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.price))
+                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.price) + " " + str(n.duration))
             else:
-                print(n.src.address + "  " + n.dest.address + " " + n.type)
+                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.duration))
 
     def min_distance(self, Q, dist):
         min = sys.maxsize
@@ -100,7 +100,7 @@ class Graph:
             for node in u.neighbours:
                 edge = self.find_min_edge_price(u, node, price, price_max)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
-                    if edge.price :
+                    if edge.price:
                         price = price + edge.price
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
                     path[self.nodes.index(node)] = edge
