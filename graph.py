@@ -29,12 +29,14 @@ class Graph:
         for e in es:
             self.edges.append(e)
 
+    # simple function to return the first edge found with a source node and a destination node
     def find_edge(self, src, dest):
         for e in self.edges:
             if e.src == src and e.dest == dest:
                 return e
         return None
 
+    # function to return the edge with minimum weight of a source node and a destination node
     def find_min_edge(self, src, dest):
         edge = self.find_edge(src, dest)
         for e in self.edges:
@@ -43,6 +45,7 @@ class Graph:
                     edge = e
         return edge
 
+    # function to return the edge with minimum weight that respect the price of a source node and a destination node
     def find_min_edge_price(self, src, dest, price, price_max):
         edge = self.find_edge(src, dest)
         for e in self.edges:
