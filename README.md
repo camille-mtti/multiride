@@ -65,7 +65,8 @@ The API have the following endpoints :
   ```json
   {
     "from":"address 1",
-    "to":"address2"
+    "to":"address2",
+    "price": 80
   }
   ```
 

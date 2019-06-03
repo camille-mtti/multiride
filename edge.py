@@ -10,6 +10,9 @@ class Edge:
     self.price = None
     self.description = None
 
+    # Add neighbour
+    self.src.neighbours.append(self.dest);
+
 
   def addAvoidedEdge(self, edge):
     self.avoidedEdges.append(edge)
