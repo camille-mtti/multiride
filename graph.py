@@ -33,6 +33,12 @@ class Graph:
                 return e
         return None
 
+    def find_node(self, node):
+        for n in self.nodes :
+            if n == node:
+                return n
+        return None
+
     def print_edges(self):
         print('mes edges : ')
         for n in self.edges:
@@ -40,8 +46,5 @@ class Graph:
                 print(n.src.address + "  " + n.dest.address + " " + n.type+" "+str(n.price))
             else:
                 print(n.src.address + "  " + n.dest.address + " " + n.type)
-
-
-
 
 
