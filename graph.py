@@ -35,13 +35,13 @@ class Graph:
                 return e
         return None
 
-    def find_min_edge(self,src, dest):
-        edge = find_edge(src, dest)
+    def find_min_edge(self, src, dest):
+        edge = self.find_edge(src, dest)
         for e in self.edges:
             if e.src == src and e.dest == dest:
-                if(e<edge):
+                if(e < edge):
                     edge = e
-        return e
+        return edge
 
     def find_node(self, node):
         for n in self.nodes:
@@ -53,8 +53,7 @@ class Graph:
         print('mes edges : ')
         for n in self.edges:
             if(n.price):
-                print(n.src.address + "  " + n.dest.address +
-                      " " + n.type+" "+str(n.price))
+                print(n.src.address + "  " + n.dest.address + " " + n.type+" "+str(n.price))
             else:
                 print(n.src.address + "  " + n.dest.address + " " + n.type)
 
@@ -69,7 +68,7 @@ class Graph:
 
     def dijkstra(self, source, target):
         dist = []
-        path = []
+        path = {}
         Q = []
         final_list = []
 
@@ -78,7 +77,6 @@ class Graph:
         for node in self.nodes:
             dist.append(sys.maxsize)
             Q.append(node)
-            path.append(self.nodes[0])
         dist[self.nodes.index(source)] = 0
 
         while Q:
@@ -87,17 +85,21 @@ class Graph:
 
             # todo verify here there are problems : edge not found
             for node in u.neighbours:
-                edge = self.find_edge(u, node)
+                edge = self.find_min_edge(u, node)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
-                    path[self.nodes.index(node)] = u
+                    path[self.nodes.index(node)] = edge
 
-        n = target
-        while n != source:
-            final_list.append(n)
-            n = path[self.nodes.index(n)]
-        final_list.append(n)
+        for key, value in path.items():
+            print(key)
+            print(value.src.address + " - " + value.dest.address)
 
-        for node in final_list:
-            print(node.address)
-        return final_list
+        # n = target
+        # while n != source:
+        #     final_list.append(n)
+        #     n = path[self.nodes.index(n)]
+        # final_list.append(n)
+
+        # for node in final_list:
+        #     print(node.address)
+        # return final_list
