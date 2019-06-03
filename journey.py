@@ -22,5 +22,5 @@ def get_journey(source, dest,price):
     print("---------------------------- PRINT GRAPH ----------------------------------------------")
     graph.print_nodes()
     graph.print_edges()
-    graph.dijkstra(graph.nodes[0], graph.nodes[len(graph.nodes) - 1])
-    return graph.nodes
+    traject = graph.dijkstra(graph.nodes[0], graph.nodes[len(graph.nodes) - 1], price)
+    return traject

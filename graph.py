@@ -43,6 +43,19 @@ class Graph:
                     edge = e
         return edge
 
+    def find_min_edge_price(self, src, dest, price, price_max):
+        edge = self.find_edge(src, dest)
+        for e in self.edges:
+            if e.src == src and e.dest == dest:
+                if(e.price):
+                    p = price + e.price
+                    if(e < edge and (price + e.price <= price_max)):
+                        edge = e
+                else :
+                    if (e < edge):
+                        edge = e
+        return edge
+
     def find_node(self, node):
         for n in self.nodes:
             if n == node:
@@ -66,13 +79,14 @@ class Graph:
         # todo : what to do when if is not respected
         return self.nodes[min_index]
 
-    def dijkstra(self, source, target):
+    def dijkstra(self, source, target, price_max):
         dist = []
         path = {}
         Q = []
         final_list = []
+        price = 0
 
-        print("dijkstra begins")
+        print("-------------------- dijkstra begins ---------------------------------------------")
         # init distances
         for node in self.nodes:
             dist.append(sys.maxsize)
@@ -83,22 +97,20 @@ class Graph:
             u = self.min_distance(Q, dist)
             Q.remove(u)
 
-            # todo verify here there are problems : edge not found
             for node in u.neighbours:
-                edge = self.find_min_edge(u, node)
+                edge = self.find_min_edge_price(u, node, price, price_max)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
+                    if edge.price :
+                        price = price + edge.price
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
                     path[self.nodes.index(node)] = edge
-
-        # for key, value in path.items():
-        #     print(key)
-        #     print(key + ": " + value.src.address + " - " + value.dest.address)
 
         edge = self.dijkstra_find_dest(path, target)
         while edge.src != source:
             final_list.append(edge)
             edge = self.dijkstra_find_dest(path, edge.src)
-    
+        final_list.append(edge)
+
         return final_list
 
     def dijkstra_find_dest(self, path, target):
