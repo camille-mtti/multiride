@@ -56,7 +56,7 @@ class Graph:
                 min = dist[self.nodes.index(node)]
                 min_index = self.nodes.index(node)
         #todo : what to do when if is not respected
-                return self.nodes[min_index]
+        return self.nodes[min_index]
 
     def dijkstra(self, source):
         dist = []
