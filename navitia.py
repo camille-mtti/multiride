@@ -20,6 +20,11 @@ def create_node_from_navitia(response):
             temp = section['to']
             node = calculate_node_coord_from_navitia(temp)
             nodes.append(node)
+        elif(section['type']=="transfer"):
+            if section['from']['name'] != section['to']['name']:
+                temp = section['to']
+                node = calculate_node_coord_from_navitia(temp)
+                nodes.append(node)
     return nodes
 
 def calculate_node_coord_from_navitia(src):
@@ -60,6 +65,15 @@ def create_edges_from_navitia(response, graph):
             dest = calculate_node_coord_from_navitia(section['to'])
             if graph.find_node_from_coord(src.coord) and graph.find_node_from_coord(dest.coord):
                     edge = Edge(graph.find_node_from_coord(src.coord),graph.find_node_from_coord(dest.coord), 1, section['duration'])
-                    set_edge_info(section,edge)
+                    set_edge_info(section, edge)
+                    edges.append(edge)
+        elif section['type']=="transfer":
+            if(section['from']['name'] != section['to']['name']):
+                src = calculate_node_coord_from_navitia(section['from'])
+                dest = calculate_node_coord_from_navitia(section['to'])
+                if graph.find_node_from_coord(src.coord) and graph.find_node_from_coord(dest.coord):
+                    edge = Edge(graph.find_node_from_coord(src.coord), graph.find_node_from_coord(dest.coord), 1,
+                                section['duration'])
+                    set_edge_info(section, edge)
                     edges.append(edge)
     return edges

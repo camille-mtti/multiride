@@ -38,7 +38,7 @@ class Uber:
         edges = []
         for i in range(0,len(graph.nodes)-1):
             src = graph.nodes[i]
-            for j in range(i + 1, len(graph.nodes)-1):
+            for j in range(i + 1, len(graph.nodes)):
                 dest = graph.nodes[j]
                 graph_edge = graph.find_edge(graph.nodes[i], graph.nodes[j])
                 if graph_edge and graph_edge.type == "walking" and graph_edge.duration < 6000 :
