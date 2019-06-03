@@ -64,10 +64,11 @@ class Graph:
         #todo : what to do when if is not respected
         return self.nodes[min_index]
 
-    def dijkstra(self, source):
+    def dijkstra(self, source, target):
         dist = []
         path = []
         Q = []
+        final_list = []
 
         print("dijkstra begins")
         # init distances
@@ -87,6 +88,11 @@ class Graph:
                     dist[self.nodes.index(node)] = dict[self.nodes.index(u)] + edge.weight
                     path[self.nodes.index(node)] = u
 
-        for node in path:
+        s = target
+        while s != self.nodes.index(source):
+            final_list.append(s)
+            s = path[self.nodes.index(s)]
+
+        for node in final_list:
             print(node.address)
-        return path
+        return final_list
