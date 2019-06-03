@@ -90,16 +90,19 @@ class Graph:
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
                     path[self.nodes.index(node)] = edge
 
-        for key, value in path.items():
-            print(key)
-            print(value.src.address + " - " + value.dest.address)
+        # for key, value in path.items():
+        #     print(key)
+        #     print(key + ": " + value.src.address + " - " + value.dest.address)
 
-        # n = target
-        # while n != source:
-        #     final_list.append(n)
-        #     n = path[self.nodes.index(n)]
-        # final_list.append(n)
+        edge = self.dijkstra_find_dest(path, target)
+        while edge.src != source:
+            final_list.append(edge)
+            edge = self.dijkstra_find_dest(path, edge.src)
+    
+        return final_list
 
-        # for node in final_list:
-        #     print(node.address)
-        # return final_list
+    def dijkstra_find_dest(self, path, target):
+        for key, edge in path.items():
+            if edge.dest.address == target.address:
+                return edge
+        return None
