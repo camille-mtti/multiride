@@ -1,6 +1,7 @@
 from node import Node
 from edge import Edge
 import coordinate
+import sys
 
 
 class Graph:
@@ -38,7 +39,34 @@ class Graph:
         for n in self.edges:
             print(n.src.address + "  " + n.dest.address + " " + n.type)
 
+    def min_distance(self, Q, dist):
+        min = sys.maxsize
+        for node in Q:
+            if dist[node] < min:
+                min = dist[node]
+                min_index = node
+        return min_index
 
+    def dijkstra(self, source):
+        dist = []
+        path = []
+        Q = set(self.nodes)
 
+        print("dijkstra begins")
+        for node in self.nodes:
+            dist[node] = sys.maxsize
+        dist[source] = 0
 
+        while Q:
+            u = self.min_distance(Q, dist)
+            Q.remove(u)
+            edge = self.find_edge(u, node)
 
+            for node in u.neighbours:
+                if dist[node] > dist[u] + edge.weight:
+                    dist[node] = dict[u] + edge.weight
+                    path[node] = u
+
+        for node in path:
+            print(node.address)
+        return path

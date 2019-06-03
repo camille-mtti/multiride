@@ -21,4 +21,5 @@ def get_journey(source, dest,price):
     graph.add_edges(uber.create_uber_trajects(graph,price))
     graph.print_nodes()
     graph.print_edges()
+    graph.dijkstra(graph.nodes[0])
     return graph.nodes
