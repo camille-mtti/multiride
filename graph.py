@@ -15,34 +15,28 @@ class Graph:
         for n in self.nodes:
             print(n.coord + "  " + n.address)
 
-    def find_node_from_coord(self,coord):
+    def find_node_from_coord(self, coord):
         for node in self.nodes:
-            if (node.coord == coord) :
+            if (node.coord == coord):
                 return node
         return None
 
-    def add_nodes(self,ns):
+    def add_nodes(self, ns):
         for n in ns:
             self.nodes.append(n)
 
-    def add_edges(self,es):
-        for e in es :
+    def add_edges(self, es):
+        for e in es:
             self.edges.append(e)
 
     def find_edge(self, src, dest):
-        for e in self.edges :
-            # print("src")
-            # print(e.src.address)
-            # print(src.address)
-            # print("dest")
-            # print(e.dest.address)
-            # print(dest.address)
+        for e in self.edges:
             if e.src == src and e.dest == dest:
                 return e
         return None
 
     def find_node(self, node):
-        for n in self.nodes :
+        for n in self.nodes:
             if n == node:
                 return n
         return None
@@ -51,7 +45,8 @@ class Graph:
         print('mes edges : ')
         for n in self.edges:
             if(n.price):
-                print(n.src.address + "  " + n.dest.address + " " + n.type+" "+str(n.price))
+                print(n.src.address + "  " + n.dest.address +
+                      " " + n.type+" "+str(n.price))
             else:
                 print(n.src.address + "  " + n.dest.address + " " + n.type)
 
@@ -61,7 +56,7 @@ class Graph:
             if dist[self.nodes.index(node)] < min:
                 min = dist[self.nodes.index(node)]
                 min_index = self.nodes.index(node)
-        #todo : what to do when if is not respected
+        # todo : what to do when if is not respected
         return self.nodes[min_index]
 
     def dijkstra(self, source, target):
@@ -75,24 +70,25 @@ class Graph:
         for node in self.nodes:
             dist.append(sys.maxsize)
             Q.append(node)
-            path.append(self.edges[0])
+            path.append(self.nodes[0])
         dist[self.nodes.index(source)] = 0
 
         while Q:
             u = self.min_distance(Q, dist)
             Q.remove(u)
 
-            #todo verify here there are problems : edge not found
+            # todo verify here there are problems : edge not found
             for node in u.neighbours:
                 edge = self.find_edge(u, node)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight
-                    path[self.nodes.index(node)] = edge
+                    path[self.nodes.index(node)] = u
 
-        s = target
-        while s != self.nodes.index(source):
-            final_list.append(s)
-            s = path[self.nodes.index(s)]
+        n = target
+        while n != source:
+            final_list.append(n)
+            n = path[self.nodes.index(n)]
+        final_list.append(n)
 
         for node in final_list:
             print(node.address)
