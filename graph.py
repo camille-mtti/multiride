@@ -15,22 +15,22 @@ class Graph:
         for n in self.nodes:
             print(n.coord + "  " + n.address)
 
-    def find_node_from_coord(self,coord):
+    def find_node_from_coord(self, coord):
         for node in self.nodes:
-            if (node.coord == coord) :
+            if (node.coord == coord):
                 return node
         return None
 
-    def add_nodes(self,ns):
+    def add_nodes(self, ns):
         for n in ns:
             self.nodes.append(n)
 
-    def add_edges(self,es):
-        for e in es :
+    def add_edges(self, es):
+        for e in es:
             self.edges.append(e)
 
     def find_edge(self, src, dest):
-        for e in self.edges :
+        for e in self.edges:
             # print("src")
             # print(e.src.address)
             # print(src.address)
@@ -41,16 +41,16 @@ class Graph:
                 return e
         return None
 
-    def find_min_edge(self,src, dest):
-        edge = find_edge(src, dest)
+    def find_min_edge(self, src, dest):
+        edge = self.find_edge(src, dest)
         for e in self.edges:
             if e.src == src and e.dest == dest:
-                if(e<edge):
+                if (e < edge):
                     edge = e
         return e
 
     def find_node(self, node):
-        for n in self.nodes :
+        for n in self.nodes:
             if n == node:
                 return n
         return None
@@ -58,8 +58,8 @@ class Graph:
     def print_edges(self):
         print('mes edges : ')
         for n in self.edges:
-            if(n.price):
-                print(n.src.address + "  " + n.dest.address + " " + n.type+" "+str(n.price))
+            if (n.price):
+                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.price))
             else:
                 print(n.src.address + "  " + n.dest.address + " " + n.type)
 
@@ -69,7 +69,7 @@ class Graph:
             if dist[self.nodes.index(node)] < min:
                 min = dist[self.nodes.index(node)]
                 min_index = self.nodes.index(node)
-        #todo : what to do when if is not respected
+        # todo : what to do when if is not respected
         return self.nodes[min_index]
 
     def dijkstra(self, source):
@@ -89,7 +89,7 @@ class Graph:
             u = self.min_distance(Q, dist)
             Q.remove(u)
 
-            #todo verify here there are problems : edge not found
+            # todo verify here there are problems : edge not found
             for node in u.neighbours:
                 edge = self.find_edge(u, node)
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
@@ -97,5 +97,5 @@ class Graph:
                     path[self.nodes.index(node)] = edge
 
         for edge in path:
-            print(edge.src.address+ " " + edge.dest.address)
+            print(edge.src.address + " " + edge.dest.address)
         return path
