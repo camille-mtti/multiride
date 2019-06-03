@@ -55,23 +55,29 @@ class Graph:
             if dist[self.nodes.index(node)] < min:
                 min = dist[self.nodes.index(node)]
                 min_index = self.nodes.index(node)
-        return min_index
+        #todo : what to do when if is not respected
+                 return self.nodes[min_index]
 
     def dijkstra(self, source):
         dist = []
         path = []
-        Q = set(self.nodes)
+        Q = set()
 
         print("dijkstra begins")
+        # init distances
         for node in self.nodes:
-            dist[self.nodes.index(node)] = sys.maxsize
-        dist[source] = 0
+            dist.append(sys.maxsize)
+            Q.add(node)
+        dist[self.nodes.index(source)] = 0
 
         while Q:
             u = self.min_distance(Q, dist)
             Q.remove(u)
+            print(u.address+" "+node.address)
             edge = self.find_edge(u, node)
-
+            if(edge):
+                print("ok !"+edge.weight)
+            #todo verify here there are problems : edge not found
             for node in u.neighbours:
                 if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
                     dist[self.nodes.index(node)] = dict[self.nodes.index(u)] + edge.weight
