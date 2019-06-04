@@ -27,7 +27,6 @@ def get_geocode():
 
 @app.route('/journey', methods=['POST'])
 def get_journey():
-
     # loads content from request body
     content = request.data
     source = json.loads(content)["from"]
@@ -42,7 +41,7 @@ def get_journey():
     dest_coord = coordinate.get_coordinates_string(dest_coord)
 
     # request for journey
-    transport = journey.get_journey(source_coord, dest_coord,price)
+    transport = journey.get_journey(source_coord, dest_coord, price)
     response = []
     for e in reversed(transport):
         response.append({

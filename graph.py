@@ -54,9 +54,6 @@ class Graph:
                     p = price + e.price
                     if (e < edge and (price + e.price <= price_max)):
                         edge = e
-                else:
-                    if (e < edge):
-                        edge = e
         return edge
 
     def find_node(self, node):

@@ -41,8 +41,14 @@ class Uber:
             src = graph.nodes[i]
             for j in range(i + 1, len(graph.nodes)):
                 dest = graph.nodes[j]
+
+                #todo add error if edge not found
+
                 graph_edge = graph.find_edge(graph.nodes[i], graph.nodes[j])
-                # we skip taking a uber if the edge is less than 10 min walking
+
+                # we skip taking a uber if the edge is less than 10 min walking because we decided that nobody
+                # takes uber for 10 min walk
+
                 if graph_edge and graph_edge.type == "walking" and graph_edge.duration < 6000:
                     print("skipping uber edge" + graph_edge.src.address + " " + graph_edge.dest.address)
                 else:

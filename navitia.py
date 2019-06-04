@@ -5,16 +5,16 @@ import coordinate
 
 # this function creates nodes from navitia response
 # for now we only create node for the first journey proposed
-# a perspective of amelioration would be to create node for the first 3 journeys but we didn't have enough time
+# a perspective of amelioration would be to create nodes for the first 3 journeys but we didn't have enough time
 # also the multiple API calls to UBER makes the request takes too much time for the nodes of one journey
-# to add other journeys we would have needed to reduce uber API calls
+# to add other journeys we would have needed to reduce uber API calls or to do multithreading or find another solution
 def create_node_from_navitia(response):
     # load data from first journey from navitia
     nodes = []
     journey = response['journeys'][0]
-    temp = journey['sections'][0]['from']
 
     # add first node
+    temp = journey['sections'][0]['from']
     node = calculate_node_coord_from_navitia(temp)
     nodes.append(node)
 
@@ -47,6 +47,7 @@ def calculate_node_coord_from_navitia(src):
 
 
 # interpret navitia results for the type of edge
+# todo complete edge description
 def set_edge_info(section, edge):
     if section['type'] == "street_network":
         if section['mode'] == 'walking':
@@ -72,8 +73,8 @@ def set_edge_info(section, edge):
 def create_edges_from_navitia(response, graph):
     journey = response['journeys'][0]
     edges = []
-    # add edges
 
+    # add edges
     for section in journey["sections"]:
         # like with nodes, we do not take care of waiting sections. Transfer sections are treated after
         if section['type'] != "waiting" and section['type'] != "transfer":
@@ -86,6 +87,7 @@ def create_edges_from_navitia(response, graph):
                             section['duration'], section['duration'])
                 set_edge_info(section, edge)
                 edges.append(edge)
+            # todo add else -> throw error
         # if the section is of type transfer, we only verify that source and destination are different to add the edge to the graph
         elif section['type'] == "transfer":
             if section['from']['name'] != section['to']['name']:
