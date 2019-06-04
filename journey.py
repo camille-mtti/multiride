@@ -8,11 +8,12 @@ from os import getenv
 load_dotenv()
 
 
-
-def get_journey(source, dest,price):
+def get_journey(source, dest, price):
     print("beginning of algorithm")
-    r = requests.get('https://api.navitia.io/v1/coverage/fr-idf/journeys?from=' + source + '&to=' + dest,
-      auth=(getenv("NAVITIA_TOKEN"), ''))
+    r = requests.get(
+      'https://api.navitia.io/v1/coverage/fr-idf/journeys?from=' + source + '&to=' + dest,
+      auth=(getenv("NAVITIA_TOKEN"), '')
+    )
     response = json.loads(r.text)
     graph = Graph()
     uber = Uber()
