@@ -56,7 +56,7 @@ class Uber:
                     result = self.estimate_traject(src.coord, dest.coord)
                     # if the price is in our budget we add the edge to the graph
                     if result.time > 10 and result.price < price:
-                        this_edge = Edge(src, dest, result.time * 0.5, result.time)
+                        this_edge = Edge(src, dest, result.time * 0.1, result.time)
                         this_edge.set_type("Uber").set_price(result.price).set_description(
                             "Uber journey, available on the Uber App for more info")
                         edges.append(this_edge)

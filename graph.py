@@ -52,7 +52,7 @@ class Graph:
             if e.src == src and e.dest == dest:
                 if (e.price):
                     p = price + e.price
-                    if (e < edge and (price + e.price <= price_max)):
+                    if (e < edge and (p <= price_max)):
                         edge = e
         return edge
 
