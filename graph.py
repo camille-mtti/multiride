@@ -32,16 +32,17 @@ class Graph:
     # simple function to return the first edge found with a source node and a destination node
     def find_edge(self, src, dest):
         for e in self.edges:
-            if e.src == src and e.dest == dest:
+            if e.src == src and e.dest == dest and e.type!="Uber":
                 return e
         return None
+
 
     # function to return the edge with minimum weight of a source node and a destination node
     def find_min_edge(self, src, dest):
         edge = self.find_edge(src, dest)
         for e in self.edges:
             if e.src == src and e.dest == dest:
-                if (e < edge):
+                if (not edge and e < edge):
                     edge = e
         return edge
 
@@ -52,7 +53,8 @@ class Graph:
             if e.src == src and e.dest == dest:
                 if (e.price):
                     p = price + e.price
-                    if (e < edge and (p <= price_max)):
+                    # if edge is empty or if e is smaller and if the price respect the price_max
+                    if ((not edge or e < edge)and (p <= price_max)):
                         edge = e
         return edge
 
@@ -66,9 +68,9 @@ class Graph:
         print('mes edges : ')
         for n in self.edges:
             if (n.price):
-                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.price) + " " + str(n.duration))
+                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.price) + " " + str(n.weight))
             else:
-                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.duration))
+                print(n.src.address + "  " + n.dest.address + " " + n.type + " " + str(n.weight))
 
     def min_distance(self, Q, dist):
         min = sys.maxsize
@@ -98,8 +100,10 @@ class Graph:
             Q.remove(u)
 
             for node in u.neighbours:
+                print(u.address+" "+node.address)
                 edge = self.find_min_edge_price(u, node, price, price_max)
-                if dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
+                # we verify we found an edge corresponding to the criterias and we check the distance from source
+                if edge and dist[self.nodes.index(node)] > dist[self.nodes.index(u)] + edge.weight:
                     if edge.price:
                         price = price + edge.price
                     dist[self.nodes.index(node)] = dist[self.nodes.index(u)] + edge.weight

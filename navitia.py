@@ -55,13 +55,21 @@ def set_edge_info(section, edge):
     if section['type'] == "public_transport":
         if section['display_informations']['commercial_mode'] == 'Métro':
             edge.set_type("metro")
+            edge.set_line(section['display_informations']['code']).set_description(
+                "to " + section['display_informations']['direction'])
         if section['display_informations']['commercial_mode'] == 'Bus':
             edge.set_type("bus")
+            edge.set_line(section['display_informations']['code']).set_description(
+                "to " + section['display_informations']['direction'])
         if section['display_informations']['commercial_mode'] == 'commercial_mode':
             edge.setTyp('tramway')
+            edge.set_line(section['display_informations']['code']).set_description(
+                "to " + section['display_informations']['direction'])
         if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations'][
             'network'] == 'RER':
             edge.set_type("rer")
+            edge.set_line(section['display_informations']['code']).set_description(
+                "to " + section['display_informations']['direction'])
         if section['display_informations']['commercial_mode'] == 'RER' and section['display_informations'][
             'network'] == 'Transilien':
             edge.set_type("transilien")
